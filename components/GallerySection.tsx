@@ -3,20 +3,22 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
-// Grid items with different sizes for masonry feel
+// Gallery items — varied heights create true masonry feel
+// height: pixel value used directly in gridRowEnd so each item
+// can span a precise number of rows (each row = 10px)
 const GALLERY_ITEMS = [
-  { id: 1, span: "row-span-2", bg: "bg-emerald-900", aspectAuto: true },
-  { id: 2, span: "", bg: "bg-teal-800" },
-  { id: 3, span: "", bg: "bg-green-700" },
-  { id: 4, span: "row-span-2", bg: "bg-lime-900", aspectAuto: true },
-  { id: 5, span: "", bg: "bg-emerald-700" },
-  { id: 6, span: "", bg: "bg-cyan-900" },
-  { id: 7, span: "", bg: "bg-teal-700" },
-  { id: 8, span: "", bg: "bg-green-800" },
-  { id: 9, span: "row-span-2", bg: "bg-emerald-800", aspectAuto: true },
-  { id: 10, span: "", bg: "bg-lime-800" },
-  { id: 11, span: "", bg: "bg-teal-900" },
-  { id: 12, span: "", bg: "bg-green-900" },
+  { id: 1,  height: 340, bg: "bg-emerald-900" },
+  { id: 2,  height: 200, bg: "bg-teal-800"    },
+  { id: 3,  height: 260, bg: "bg-green-700"   },
+  { id: 4,  height: 180, bg: "bg-lime-900"    },
+  { id: 5,  height: 310, bg: "bg-emerald-700" },
+  { id: 6,  height: 220, bg: "bg-cyan-900"    },
+  { id: 7,  height: 280, bg: "bg-teal-700"    },
+  { id: 8,  height: 190, bg: "bg-green-800"   },
+  { id: 9,  height: 360, bg: "bg-emerald-800" },
+  { id: 10, height: 230, bg: "bg-lime-800"    },
+  { id: 11, height: 200, bg: "bg-teal-900"    },
+  { id: 12, height: 270, bg: "bg-green-900"   },
 ];
 
 const placeholderColors = [
@@ -33,6 +35,9 @@ function GalleryItem({ item, index }: GalleryItemProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
+  // Each grid row is 10px; span enough rows to hit our target height (+ 8px gap)
+  const rowSpan = Math.ceil((item.height + 8) / 10);
+
   return (
     <motion.div
       ref={ref}
@@ -43,8 +48,8 @@ function GalleryItem({ item, index }: GalleryItemProps) {
         delay: (index % 4) * 0.08,
         ease: [0.22, 1, 0.36, 1],
       }}
-      className={`group relative overflow-hidden rounded-2xl ${item.span} cursor-pointer`}
-      style={{ minHeight: "200px" }}
+      className="group relative overflow-hidden rounded-2xl cursor-pointer"
+      style={{ gridRowEnd: `span ${rowSpan}` }}
     >
       {/* Placeholder — replace with real <img> */}
       <div
@@ -115,8 +120,8 @@ export default function GallerySection() {
       <div
         className="grid gap-3 sm:gap-4"
         style={{
-          gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-          gridAutoRows: "180px",
+          gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+          gridAutoRows: "10px",
           gridAutoFlow: "dense",
         }}
       >

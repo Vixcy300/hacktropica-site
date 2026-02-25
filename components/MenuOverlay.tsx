@@ -72,7 +72,7 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
                 loop
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover opacity-60"
-                src="/placeholder.mp4"
+                src="/main.mp4"
                 poster="/placeholder.jpg"
               />
               {/* Overlay gradient */}

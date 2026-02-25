@@ -161,6 +161,10 @@ export default function TestimonialsSection() {
     if (trackRef.current) trackRef.current.scrollLeft = scrollLeft.current - walk;
   };
 
+  const scrollBy = (dir: -1 | 1) => {
+    trackRef.current?.scrollBy({ left: dir * 420, behavior: "smooth" });
+  };
+
   return (
     <section
       id="testimonials"
@@ -194,6 +198,33 @@ export default function TestimonialsSection() {
         >
           People&apos;s<br />Remarks
         </motion.h2>
+
+        {/* Arrow buttons */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={headInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex gap-3 mt-6"
+        >
+          <button
+            onClick={() => scrollBy(-1)}
+            className="w-11 h-11 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200"
+            aria-label="Previous"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button
+            onClick={() => scrollBy(1)}
+            className="w-11 h-11 rounded-full border border-black/20 flex items-center justify-center hover:bg-black hover:text-white transition-colors duration-200"
+            aria-label="Next"
+          >
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </motion.div>
       </div>
 
       {/* ─── Draggable Carousel ──────────────────────────────────────── */}

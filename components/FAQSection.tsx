@@ -10,48 +10,54 @@ export const FAQS = [
     question: "Who can participate in Hacktropica?",
     answer:
       "Hacktropica is open to anyone who is a student currently enrolled at any college or university. Whether you are a first-year fresher or a PhD scholar, all skill levels are genuinely welcome. We especially encourage first-time hackers to join — our mentors will be there to guide you every step of the way.",
-    color: "#1d4ed8",     // blue
-    textColor: "#ffffff",
+    color: "#dbeafe",       // soft baby blue
+    textColor: "#1e3a5f",
+    watermarkColor: "rgba(30,58,95,0.10)",
   },
   {
     id: 2,
     question: "Is there a registration fee?",
     answer:
       "No! Hacktropica is completely free to participate in. We believe great ideas shouldn't be gated by a paywall. Accommodation and meals during the event are also covered once you register and are accepted. All you need to do is show up and build.",
-    color: "#eab308",     // yellow
-    textColor: "#111111",
+    color: "#fef9c3",       // soft cream / pale yellow
+    textColor: "#78350f",
+    watermarkColor: "rgba(120,53,15,0.10)",
   },
   {
     id: 3,
     question: "What should I bring to the hackathon?",
     answer:
       "Bring your laptop, charger, any hardware you plan to use, your student ID, and most importantly — your curiosity and enthusiasm. We'll provide power strips, high-speed internet, food, drinks, swag, and lots of fun. We also recommend bringing a sleeping bag or travel pillow if you plan to hack through the night.",
-    color: "#ec4899",     // pink
-    textColor: "#ffffff",
+    color: "#fce7f3",       // pale rose
+    textColor: "#831843",
+    watermarkColor: "rgba(131,24,67,0.10)",
   },
   {
     id: 4,
     question: "Can I participate solo?",
     answer:
       "Yes, absolutely! While most teams are 2–4 members, you are entirely welcome to compete solo. We have team-formation sessions at the start of the event where solo hackers can find collaborators if they wish to team up.",
-    color: "#1d4ed8",
-    textColor: "#ffffff",
+    color: "#dcfce7",       // soft mint green
+    textColor: "#14532d",
+    watermarkColor: "rgba(20,83,45,0.10)",
   },
   {
     id: 5,
     question: "What tracks / themes are available?",
     answer:
       "Hacktropica 2.0 features tracks in AI/ML, Sustainability & Climate Tech, Web3 & DeFi, Health & BioTech, and Open Innovation. You're free to participate in any track or even blend multiple domains — the only rule is that your project must be built fresh during the hackathon.",
-    color: "#eab308",
-    textColor: "#111111",
+    color: "#fef9c3",
+    textColor: "#78350f",
+    watermarkColor: "rgba(120,53,15,0.10)",
   },
   {
     id: 6,
     question: "What prizes are on offer?",
     answer:
       "We have exciting prizes totalling over ₹5,00,000 including cash awards, internship opportunities, cloud credits, premium software licences, and exclusive Hacktropica swag. Specific prize details for each track will be announced closer to the event date.",
-    color: "#ec4899",
-    textColor: "#ffffff",
+    color: "#fce7f3",
+    textColor: "#831843",
+    watermarkColor: "rgba(131,24,67,0.10)",
   },
 ];
 
@@ -69,20 +75,51 @@ function FAQCard({ faq, index }: FAQCardProps) {
       whileInView={{ opacity: 1, y: 0, rotate: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.55, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="relative min-w-[280px] sm:min-w-[340px] w-[340px] rounded-3xl overflow-hidden cursor-pointer faq-pattern flex-shrink-0"
-      style={{ background: faq.color }}
+      className="relative min-w-[280px] sm:min-w-[340px] w-[340px] rounded-3xl overflow-hidden cursor-pointer flex-shrink-0"
+      style={{ background: faq.color, boxShadow: "0 2px 16px rgba(0,0,0,0.06)" }}
       onClick={() => setOpen((v) => !v)}
     >
-      {/* Pattern watermark */}
+      {/* Botanical watermark — large palm / leaf shape, anchored right */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 5C20 5 5 25 5 45c0 15 10 30 25 30 25 0 45-20 45-40C75 15 60 5 40 5z' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E\")",
-          backgroundSize: "80px 80px",
+          right: "-20px",
+          bottom: "-20px",
+          width: "220px",
+          height: "220px",
           zIndex: 0,
+          opacity: 1,
         }}
-      />
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Leaf 1 */}
+          <path
+            d="M100 180 C80 140 30 120 20 60 C50 80 90 100 100 180Z"
+            fill={faq.watermarkColor}
+          />
+          {/* Leaf 2 */}
+          <path
+            d="M100 180 C120 140 170 120 180 60 C150 80 110 100 100 180Z"
+            fill={faq.watermarkColor}
+          />
+          {/* Stem */}
+          <path
+            d="M100 180 C100 160 100 100 100 40"
+            stroke={faq.watermarkColor}
+            strokeWidth="3"
+          />
+          {/* Extra frond left */}
+          <path
+            d="M100 120 C75 105 45 100 25 90 C55 95 85 110 100 120Z"
+            fill={faq.watermarkColor}
+          />
+          {/* Extra frond right */}
+          <path
+            d="M100 120 C125 105 155 100 175 90 C145 95 115 110 100 120Z"
+            fill={faq.watermarkColor}
+          />
+        </svg>
+      </div>
 
       <div className="relative z-10 p-8 flex flex-col gap-0" style={{ minHeight: "420px" }}>
         {/* Question number */}
